@@ -45,8 +45,8 @@ public class GMScript : MonoBehaviour
     private Vector3Int[] PIECE_J;
     private Vector3Int[] PIECE_S;
     private Vector3Int[] PIECE_I;
-    private Vector3Int[][] PIECES; 
-
+    private Vector3Int[][] PIECES;
+    
     // ReSharper disable once InconsistentNaming
     private int wx2bx(int wx)
     {
@@ -63,6 +63,38 @@ public class GMScript : MonoBehaviour
         PIECE_I = new Vector3Int[] { new(0,0),  new(-1,0), new(-2,0), new(1,0) };
         PIECES = new []{PIECE_T,PIECE_L,PIECE_Z,PIECE_J,PIECE_S,PIECE_I};
     }
+
+    public void HandleInputData(int val) {
+        if (val == 0) {
+            PIECES = new []{PIECE_T,PIECE_Z,PIECE_J,PIECE_S,PIECE_L};
+            Debug.Log("val == 0");
+        }
+        if (val == 1) {
+            PIECES = new []{PIECE_T,PIECE_L,PIECE_Z,PIECE_S,PIECE_I};
+            //FavoritePiece = PIECES[3];
+            Debug.Log("val == 1");
+        }
+        if (val == 2) {
+            PIECES = new []{PIECE_T,PIECE_Z,PIECE_J,PIECE_S,PIECE_I};
+            //FavoritePiece = PIECES[1];
+            Debug.Log("val == 2");
+        }
+        if (val == 3) {
+            PIECES = new []{PIECE_T,PIECE_L,PIECE_J,PIECE_S,PIECE_I};
+            //FavoritePiece = PIECES[2];
+            Debug.Log("val == 3");
+        }
+        if (val == 4) {
+            PIECES = new []{PIECE_L,PIECE_Z,PIECE_J,PIECE_S,PIECE_I};
+            //FavoritePiece = PIECES[0];
+            Debug.Log("val == 4");
+        }
+        if (val == 5) {
+            PIECES = new []{PIECE_T,PIECE_L,PIECE_Z,PIECE_J,PIECE_I};
+            //FavoritePiece = PIECES[4];
+            Debug.Log("val == 5");
+        }
+    }
     
     void Start()
     {
@@ -76,10 +108,16 @@ public class GMScript : MonoBehaviour
 
     bool MakeNewPiece(int midX, int maxY)
     {
+
         if (null != _myPiece) 
             return false;
+         
         var targetPiece = PIECES[Random.Range(0, PIECES.Length)];
+
+        
         _myPiece = new Vector3Int[targetPiece.Length];
+        
+        
         for (var i = 0; i < targetPiece.Length; i++)
         {
             _myPiece[i].x = targetPiece[i].x + midX;
